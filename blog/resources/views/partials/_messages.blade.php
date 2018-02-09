@@ -5,7 +5,7 @@
 
 @endif
 
-@if(count($erros) > 0)
+@if(!$erros->isEmpty())
 
     <div class="alert alert-danger" role="alert">
         <strong>Erros:</strong>
