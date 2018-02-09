@@ -5,7 +5,9 @@
 
 @endif
 
-@if(!$erros->isEmpty())
+
+
+ {{-- @if(!$erros->isEmpty())
 
     <div class="alert alert-danger" role="alert">
         <strong>Erros:</strong>
@@ -16,4 +18,7 @@
         </ul>
     </div>
 
-@endif
+@endif --}}
+
+
+ {{-- @if(Session()->has('success')) --}}

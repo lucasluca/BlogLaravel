@@ -50,8 +50,8 @@ class PostController extends Controller
         $post->body = $request->body;
         $post->save();
 
+        //$request->session()->flash('success', 'Post was added!');//
         Session::flash('success', 'Mensagem enviada com sucesso');
-
         return redirect()->route('posts.show', $post->id);
         // store in the database
     }
@@ -64,7 +64,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return view('posts.show');
+        $post = Post::find($id);
+        return view('posts.show')->withPost($post);
     }
 
     /**
