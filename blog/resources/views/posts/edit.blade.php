@@ -1,13 +1,18 @@
 @extends('main')
 
-@section('title', '|View Post')
+@section('title', '|Editar o Post')
 
 @section('content')
 
     <div class="row">
+        {!! Form::model($post, ['route' => ['posts.update', $post->id]]) !!}
         <div class="col-md-8">
-            <h1> {{$post->title}} </h1>
-            <p> {{$post->body}} </p>
+
+            {{Form::label('title', 'Titulo:')}}
+            {{ Form::text('title', null, ["class" => 'form-control input-lg']) }}
+
+            {{Form::label('title', 'Corpo:', ['class' => 'form-spacing-top'])}}
+            {{ Form::textarea('body', null, ["class" => 'form-control']) }}
         </div>
 
         <div class="col-md-4">
@@ -23,17 +28,21 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        {!! Html::linkroute('posts.edit', 'Editar', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
+                        {!! Html::linkRoute('posts.show', 'Cancelar', array($post->id), array('class' => 'btn btn-danger btn-block')) !!}
                     </div>
 
                     <div class="col-sm-6">
-                        {!! Html::linkroute('posts.destroy', 'Deletar', array($post->id), array('class' => 'btn btn-danger btn-block')) !!}
+                        {!! Html::linkRoute('posts.update', 'Salvar alterações', array($post->id), array('class' => 'btn btn-success btn-block')) !!}    
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        {!! Form::close() !!}
+    </div><!-- end of row-->
 
+    
+
+    
    
 
 @endsection
