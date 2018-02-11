@@ -17,7 +17,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        //Pega todos os posts 
+        
+        //$posts = Post::all();
+
+        $posts = Post::orderBy('id', 'desc')->paginate(5);
 
         return view('posts.index')->withPosts($posts);
     }
@@ -92,7 +96,23 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        //Validar as entradas
+        $this->validate($request, array(
+            'title' => 'required|max:255',
+            'body' => 'required'
+        ));
+        //Salvar os dados no banco
+        $post = Post::find($id);
+
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+
+        $post->save();
+
+        //setar a mensagem com sucesso
+        Session::flash('success', 'O post foi salvo com sucesso');
+
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**
@@ -103,6 +123,12 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        $post = Post::find($id);
+        $post->delete();
+
+        Session::flash('success', 'O post foi deletado com sucesso');
+
+        return redirect()->route('posts.index');
+
+        }
 }
