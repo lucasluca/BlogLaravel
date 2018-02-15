@@ -23,7 +23,9 @@ Route::get('/about', 'PagesController@getAbout');
 
 Route::resource('posts', 'PostController');
 
+//Categories rote
 
+Route::resource('categories', 'CategoryController', ['except' => ['create']]);
 
 
 Auth::routes();
